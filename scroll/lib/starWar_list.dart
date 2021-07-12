@@ -3,15 +3,14 @@ import 'starwarrepo.dart';
 
 class StarWarpeople extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PhotoState createState() => _PhotoState();
 }
 
-class _HomePageState extends State<StarWarpeople> {
-  var _datafromAPI = StarwarsRepo();
+class _PhotoState extends State<StarWarpeople> {
   @override
   void initState() {
     super.initState();
-    _datafromAPI.fetchPeople();
+    StarwarsRepo().fetchPeople();
   }
 
   @override
@@ -20,7 +19,10 @@ class _HomePageState extends State<StarWarpeople> {
     return Scaffold(
         appBar: AppBar(
             title: Text(
-      "StarWar-API",
-    )));
+          "StarWar-API",
+        )),
+        body: ListView.builder(itemBuilder: (BuildContext context, int index) {
+         return 
+        }));
   }
 }
