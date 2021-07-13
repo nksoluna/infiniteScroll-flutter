@@ -14,7 +14,7 @@ class _PhotoState extends State<StarWarpeople> {
   bool _error = false;
   bool _loading = true;
   final int _defaultPhotosPerPageCount = 10;
-  List <People> _people = const [];
+  List<People> _people = [];
   final int _nextPageThreshold = 5;
   
   @override
@@ -24,8 +24,9 @@ class _PhotoState extends State<StarWarpeople> {
     _pageNumber = 1;
     _error = false;
     _loading = true;
-    _people = const [] ;
+    _people = [] ;
     fetchpeople() ;
+
 
 
   }
@@ -53,7 +54,6 @@ class _PhotoState extends State<StarWarpeople> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
     return Scaffold(
        appBar: AppBar(title: Text("StarsWars API")),
       body: getBody(),
@@ -131,6 +131,7 @@ class _PhotoState extends State<StarWarpeople> {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     peoples.name,
+                     
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
