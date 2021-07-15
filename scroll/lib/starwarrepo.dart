@@ -6,12 +6,15 @@ class People {
   final String id ;
   final String height ;
   final String weight ;
+  final String haircolor ;
+  final String eyecolor ;
+  final String birthyear ;
 
-  People(this.id ,this.name,this.height ,this.weight , this.gender);
+  People(this.id ,this.name,this.height ,this.weight ,this.haircolor,this.eyecolor  ,this.birthyear, this.gender);
 
   factory People.fromJson(dynamic json) {
     var id = json['url'].split('https://swapi.dev/api/people/').last.split('/').first ;
-    return People(id ,json["name"],json["height"],json["mass"] , json["gender"]);
+    return People(id ,json["name"],json["height"],json["mass"] ,json["hair_color"] ,json["eye_color"] ,json["birth_year"] ,json["gender"]);
   }
 }
 class StarwarsRepo {

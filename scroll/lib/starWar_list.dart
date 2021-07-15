@@ -12,7 +12,7 @@ class _PhotoState extends State<StarWarpeople> {
   int _pageNumber =  1;
   bool _error = false;
   bool _loading = true;
-  final int _defaultPhotosPerPageCount = 10;
+  final int _defaultPhotosPerPageCount = 10; // Initialize variable
   List<People> _people = [];
   final int _nextPageThreshold = 5;
   
@@ -22,7 +22,7 @@ class _PhotoState extends State<StarWarpeople> {
      _hasMore = true;
     _pageNumber = 1;
     _error = false;
-    _loading = true;
+    _loading = true;   // Set all in init state
     _people = [] ;
     fetchpeople() ;
   }
@@ -35,13 +35,13 @@ class _PhotoState extends State<StarWarpeople> {
           _loading = false;
           _pageNumber = _pageNumber + 1;
           _people.addAll(repolist);
-        },
+        }, // Set state if its run property    
       );
     } catch (e) {
       setState(
         () {
           _loading = false;
-          _error = true;
+          _error = true; // Setstate if error or exception
         },
       );
     }
@@ -56,39 +56,39 @@ class _PhotoState extends State<StarWarpeople> {
       );
   }
    Widget getBody() {
-    if (_people.isEmpty) {
-      if (_loading) {
+    if (_people.isEmpty) { // for checking if _people  is empty data loading will Stop
+      if (_loading) { // if loading still True , It still use widget
         return Center(
             child: Padding(
           padding: const EdgeInsets.all(8),
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(), // loading with circular loader
         ));
-      } else if (_error) {
+      } else if (_error) { // if error = true
         return Center(
           child: InkWell(
             onTap: () => setState(
               () {
-                _loading = true;
-                _error = false;
-                fetchpeople();
+                _loading = true; //change loading to true and trying load same page
+                _error = false; //change error to false
+                fetchpeople(); // tap to set new State 
               },
             ),
-            child: Padding(
+            child: Padding( // if cannot loading
               padding: const EdgeInsets.all(16),
-              child: Text("Error While Loading Image. Please Try Again"),
+              child: Text("Error While Loading Image. Please Try Again"), // return this text to change the upper state
             ),
           ),
         );
       }
-    } else {
+    } else { // if error = false
       return ListView.builder(
-        itemCount: _people.length + (_hasMore ? 1 : 0),
-        itemBuilder: (context, index) {
-          if (index == _people.length - _nextPageThreshold) {
-            fetchpeople();
+        itemCount: _people.length + (_hasMore ? 1 : 0), // itemCount = amount of people and if _hasmore = true this count will stop in last element
+        itemBuilder: (context, index) { 
+          if (index == _people.length - _nextPageThreshold) { // if people.length has more     than nextpagethreshold
+            fetchpeople(); //fetching people
           }
           if (index == _people.length) {
-            if (_error) {
+            if (_error) { // same as error
               return Center(
                 child: InkWell(
                   onTap: () => setState(
@@ -114,17 +114,20 @@ class _PhotoState extends State<StarWarpeople> {
             }
           }
           final People peoples = _people[index];
-          print('ID : ' + peoples.id + ' ' + peoples.name + ' Height : ' + peoples.height + ' Weight : ' + peoples.weight);
+          print('ID : ' + peoples.id + ' ' + peoples.name + ' Height : ' +
+           peoples.height + ' Weight : ' + peoples.weight + ' Haircolor : ' + peoples.haircolor
+           + ' Eyecolor : ' + peoples.eyecolor + ' Byear : ' + peoples.birthyear) ; // test console 
           return Card(
-            child: Column(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Image.network(
-                  'https://starwars-visualguide.com/assets/img/characters/${peoples.id}.jpg',
+                  'https://starwars-visualguide.com/assets/img/characters/${peoples.id}.jpg', // image bring from id
                   fit: BoxFit.fitWidth,
-                  width: double.infinity,
+                  width: 160 ,
                   height: 160,
                 ),
-                Padding(
+                Padding( // change style paddding
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     peoples.name + ' ' + peoples.id ,
@@ -137,7 +140,7 @@ class _PhotoState extends State<StarWarpeople> {
               ],
             ),
           );
-        },
+          },
       );
     }
     return Container();
