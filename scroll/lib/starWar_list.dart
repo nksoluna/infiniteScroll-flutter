@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'starwarrepo.dart';
 
-
 class StarWarpeople extends StatefulWidget {
 
   @override
@@ -26,13 +25,10 @@ class _PhotoState extends State<StarWarpeople> {
     _loading = true;
     _people = [] ;
     fetchpeople() ;
-
-
-
   }
   Future<void> fetchpeople() async {
   try {
-      List<People> repolist = await StarwarsRepo().fetchPeople() ;
+      List<People> repolist = await StarwarsRepo().fetchPeople(page: _pageNumber) ;
       setState(
         () {
           _hasMore = repolist.length == _defaultPhotosPerPageCount;
@@ -111,13 +107,14 @@ class _PhotoState extends State<StarWarpeople> {
             } else {
               return Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8.0),
                   child: CircularProgressIndicator(),
                 ),
               );
             }
           }
           final People peoples = _people[index];
+          print('ID : ' + peoples.id + ' ' + peoples.name + ' Height : ' + peoples.height + ' Weight : ' + peoples.weight);
           return Card(
             child: Column(
               children: <Widget>[
@@ -130,8 +127,7 @@ class _PhotoState extends State<StarWarpeople> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
-                    peoples.name,
-                     
+                    peoples.name + ' ' + peoples.id ,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
