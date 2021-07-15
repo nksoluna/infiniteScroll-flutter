@@ -108,18 +108,45 @@ class _PhotoState extends State<StarWarpeople> {
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(), // Primary Swatch
                 ),
               );
             }
           }
           final People peoples = _people[index];
-          print('ID : ' + peoples.id + ' ' + peoples.name + ' Height : ' +
-           peoples.height + ' Weight : ' + peoples.weight + ' Haircolor : ' + peoples.haircolor
-           + ' Eyecolor : ' + peoples.eyecolor + ' Byear : ' + peoples.birthyear) ; // test console 
+          print('ID : ' + peoples.id + ' Name : '+ peoples.name + ' Eyecolor : ' + peoples.eyecolor) ;
+           Color eyecolor  ; // test console 
+           var heightmetre  , weightkg;
+           var birthyear = peoples.birthyear.split('BBY'); 
+           var numbirthyear = birthyear[0] ;
+           if (peoples.height == 'unknown') {
+              heightmetre = 'Unknown' ; 
+           }
+           else {
+             heightmetre = (double.parse(peoples.height)/100).toString() + ' m' ;
+           }
+
+           if (peoples.weight != 'unknown') {
+             weightkg = peoples.weight + ' kg' ;
+           }
+           else {
+             weightkg = 'Unknown' ;
+           }
+           if(peoples.eyecolor == 'n/a' || peoples.eyecolor == 'none') {
+             eyecolor = Colors.black ;
+           }
+           else {
+             eyecolor = Colors.redAccent ;
+           }
+       
+           if(numbirthyear == 'unknown') {
+               numbirthyear = 'Unknown' ;
+           }
+           else {
+             numbirthyear = numbirthyear + ' BBY' ;
+           }
           return Card(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
               children: <Widget>[
                 Image.network(
                   'https://starwars-visualguide.com/assets/img/characters/${peoples.id}.jpg', // image bring from id
@@ -129,15 +156,61 @@ class _PhotoState extends State<StarWarpeople> {
                 ),
                 Padding( // change style paddding
                   padding: const EdgeInsets.all(16),
-                  child: Text(
-                    peoples.name + ' ' + peoples.id ,
+                  child: Column(
+                    children : [ 
+                      Text(
+                    'No.${peoples.id}' ,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                ),
-              ],
+                   Text(
+                    'Name : ${peoples.name}' ,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Height : $heightmetre' ,
+                    style: TextStyle( 
+                      fontWeight : FontWeight.bold,
+                      fontSize: 16 ,
+                  )),
+                   Text(
+                    'Weight : $weightkg' ,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                   Text(
+                    'Hair Color : ${peoples.haircolor}' ,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.brown ,
+                    ),
+                  ),
+                   Text(
+                    'Eye Color : ${peoples.eyecolor}' ,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: eyecolor,
+                    ),
+                  ),
+                     Text(
+                    'Birthyear : $numbirthyear' ,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+              
+                    ),
+                  ),
+                    ]),
+                )],
             ),
           );
           },
