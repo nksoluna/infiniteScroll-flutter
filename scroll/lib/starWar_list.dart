@@ -75,7 +75,7 @@ class _PhotoState extends State<StarWarpeople> {
             ),
             child: Padding( // if cannot loading
               padding: const EdgeInsets.all(16),
-              child: Text("Error While Loading Image. Please Try Again"), // return this text to change the upper state
+              child: Text("Error While Loading Data. Please Try Again"), // return this text to change the upper state
             ),
           ),
         );
@@ -100,7 +100,7 @@ class _PhotoState extends State<StarWarpeople> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text("Error while loading photos, tap to try agin"),
+                    child: Text("Error while loading more Data ,Please tap to try agin"),
                   ),
                 ),
               );
@@ -114,9 +114,14 @@ class _PhotoState extends State<StarWarpeople> {
             }
           }
           final People peoples = _people[index];
-          print('ID : ' + peoples.id + ' Name : '+ peoples.name + ' Eyecolor : ' + peoples.eyecolor) ;
-           Color eyecolor  ; // test console 
+          print('ID : ' + peoples.id + ' Name : '+ peoples.name + ' Haircolor : ' + peoples.haircolor) ;
+           Color eyecolor , haircolor  ; // test console 
            var heightmetre  , weightkg;
+           double fontsize = 16 ;
+           var eyecolorset = peoples.eyecolor.split(',') ;
+           var eyecolorfirst = eyecolorset[0].toString() ;
+           var haircolorset = peoples.haircolor.split(',') ;
+           var haircolorfirst = haircolorset[0].toString() ;
            var birthyear = peoples.birthyear.split('BBY'); 
            var numbirthyear = birthyear[0] ;
            if (peoples.height == 'unknown') {
@@ -132,11 +137,65 @@ class _PhotoState extends State<StarWarpeople> {
            else {
              weightkg = 'Unknown' ;
            }
-           if(peoples.eyecolor == 'n/a' || peoples.eyecolor == 'none') {
-             eyecolor = Colors.black ;
+           switch (eyecolorfirst) {
+             case 'red' : 
+                eyecolor = Color(0xFFFF0000) ;
+               break;
+             case 'blue' : 
+                eyecolor = Color(0xFF0000FF) ;
+               break;
+             case 'yellow' : 
+                eyecolor = Color(0xFFFFFF00) ;
+               break;
+             case 'brown' : 
+                eyecolor = Color(0xFFA52A2A) ;
+               break;
+             case 'blue-gray' : 
+                eyecolor = Color(0xFF6699CC) ;
+               break;  
+             case 'black' : 
+                eyecolor = Color(0xFF000000) ;
+               break;  
+             case 'hazel' : 
+                eyecolor = Color(0xFFC9C789) ;
+               break;
+             case 'orange' : 
+                eyecolor = Color(0xFFFFA500) ;
+               break;  
+             case 'pink' : 
+                eyecolor = Color(0xFFFFC0CB) ;
+               break;  
+             case 'gold' : 
+                eyecolor = Color(0xFFFFD700) ;
+               break;     
+             case 'white' : 
+                eyecolor = Color(0xFFD8D8D8) ;
+               break; 
+            case 'green' : 
+                eyecolor = Color(0xFF00FF00) ;
+               break;     
+             default:
+                eyecolor = Color(0xFFee82ee) ;
            }
-           else {
-             eyecolor = Colors.redAccent ;
+
+           switch (haircolorfirst) {
+             case 'blond' : 
+                haircolor = Color(0xFFF1CC8F) ;
+               break;
+             case 'black' : 
+                haircolor = Color(0xFF000000) ;
+               break;
+             case 'auburn' : 
+                haircolor = Color(0xFF71231D) ;
+               break;
+             case 'brown' : 
+                haircolor = Color(0xFFA52A2A) ;
+               break;
+             case 'white' : 
+                haircolor = Color(0xFFD3D3D3) ;
+               break;
+              default :
+              haircolor = Color(0xFFCD7F32) ;  
            }
        
            if(numbirthyear == 'unknown') {
@@ -145,8 +204,9 @@ class _PhotoState extends State<StarWarpeople> {
            else {
              numbirthyear = numbirthyear + ' BBY' ;
            }
+           print(haircolorfirst) ;
           return Card(
-            child: Column(
+            child: Row(
               children: <Widget>[
                 Image.network(
                   'https://starwars-visualguide.com/assets/img/characters/${peoples.id}.jpg', // image bring from id
@@ -157,55 +217,63 @@ class _PhotoState extends State<StarWarpeople> {
                 Padding( // change style paddding
                   padding: const EdgeInsets.all(16),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children : [ 
                       Text(
                     'No.${peoples.id}' ,
+                    
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: fontsize
                     ),
                   ),
                    Text(
                     'Name : ${peoples.name}' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: fontsize,
                     ),
                   ),
                   Text(
                     'Height : $heightmetre' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle( 
                       fontWeight : FontWeight.bold,
-                      fontSize: 16 ,
+                      fontSize: fontsize ,
                   )),
                    Text(
                     'Weight : $weightkg' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: fontsize,
                     ),
                   ),
                    Text(
                     'Hair Color : ${peoples.haircolor}' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.brown ,
+                      fontSize: fontsize,
+                      color: haircolor,
                     ),
                   ),
                    Text(
                     'Eye Color : ${peoples.eyecolor}' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: fontsize,
                       color: eyecolor,
                     ),
                   ),
                      Text(
                     'Birthyear : $numbirthyear' ,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: fontsize
               
                     ),
                   ),
