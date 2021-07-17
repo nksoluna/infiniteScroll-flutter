@@ -52,7 +52,8 @@ class _PhotoState extends State<StarWarpeople> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(title: Text("StarsWars API")),
-      body: getBody(),
+      body: 
+      getBody(),
       );
   }
    Widget getBody() {
@@ -215,9 +216,8 @@ class _PhotoState extends State<StarWarpeople> {
                   height: 160,
                 ),
                 Padding( // change style paddding
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children : [ 
                       Text(
                     'No.${peoples.id}' ,
@@ -226,15 +226,16 @@ class _PhotoState extends State<StarWarpeople> {
                       fontWeight: FontWeight.bold,
                       fontSize: fontsize
                     ),
-                  ),
-                   Text(
+                  ),Align(
+                    alignment: Alignment.center,
+                   child : Text(
                     'Name : ${peoples.name}' ,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: fontsize,
                     ),
-                  ),
+                  )),
                   Text(
                     'Height : $heightmetre' ,
                     textAlign: TextAlign.center,
