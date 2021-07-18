@@ -53,9 +53,17 @@ class _PhotoState extends State<StarWarpeople> {
     return Scaffold(
        appBar: AppBar(title: Text("StarsWars API"),
        backgroundColor: Color(0xFFEFDBB2),),
-      body: 
-      getBody(),
-      );
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+        child : Column(
+    children :  <Widget>[ 
+       Text('List Of Charaters in "STAR WARS"' ,style: TextStyle(fontWeight: FontWeight.bold ,
+       fontSize: 24 ,
+       color: Color(0xFF221551)),),
+       SizedBox(height: 20,) ,
+       Expanded(child: 
+      getBody()),]),
+    ));
   }
    Widget getBody() {
     if (_people.isEmpty) { // for checking if _people  is empty data loading will Stop
