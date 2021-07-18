@@ -241,7 +241,7 @@ class _PhotoState extends State<StarWarpeople> {
                 bgcolor = Color(0xFFC7CEEA) ;
                break;
               default :
-              haircolor = Color(0xFFD3D3D3) ;  
+              bgcolor = Color(0xFFD3D3D3) ;  
            }
        
        
