@@ -51,7 +51,8 @@ class _PhotoState extends State<StarWarpeople> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(title: Text("StarsWars API")),
+       appBar: AppBar(title: Text("StarsWars API"),
+       backgroundColor: Color(0xFFEFDBB2),),
       body: 
       getBody(),
       );
@@ -116,7 +117,8 @@ class _PhotoState extends State<StarWarpeople> {
           }
           final People peoples = _people[index];
           print('ID : ' + peoples.id + ' Name : '+ peoples.name + ' Haircolor : ' + peoples.haircolor) ;
-           Color eyecolor , haircolor  ; // test console 
+           Color eyecolor , haircolor  ;
+           Color bgcolor = Color(0xFFFFFFFF) ; // test console 
            var heightmetre  , weightkg;
            double fontsize = 16 ;
            var eyecolorset = peoples.eyecolor.split(',') ;
@@ -198,6 +200,42 @@ class _PhotoState extends State<StarWarpeople> {
               default :
               haircolor = Color(0xFFCD7F32) ;  
            }
+
+           switch ((index+1)%10) {
+             case 1 : 
+                bgcolor = Color(0xFFE2F0CB) ;
+               break;
+             case 2 : 
+                bgcolor = Color(0xFFFEC8D8) ;
+               break;
+             case 3 : 
+                bgcolor = Color(0xFFD291BC) ;
+               break;
+             case 4 : 
+                bgcolor = Color(0xFF957DAD) ;
+               break;
+             case 5 : 
+                bgcolor = Color(0xFFE0BBE4) ;
+               break;
+             case 6 : 
+                bgcolor = Color(0xFFFF9AA2) ;
+               break;
+             case 7 : 
+                bgcolor = Color(0xFFFFB7B2) ;
+               break;
+             case 8 : 
+                bgcolor = Color(0xFFFFDAC1) ;
+               break;
+             case 9 : 
+                bgcolor = Color(0xFFB5EAD7) ;
+               break;
+             case 0 : 
+                bgcolor = Color(0xFFC7CEEA) ;
+               break;
+              default :
+              haircolor = Color(0xFFD3D3D3) ;  
+           }
+       
        
            if(numbirthyear == 'unknown') {
                numbirthyear = 'Unknown' ;
@@ -207,6 +245,7 @@ class _PhotoState extends State<StarWarpeople> {
            }
            print(haircolorfirst) ;
           return Card(
+            color : bgcolor ,
             child: Row(
               children: <Widget>[
                 Image.network(
